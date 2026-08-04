@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { AmbientSymbol } from './components/layout/AmbientSymbol'
 import { Navbar } from './components/layout/Navbar'
 import { PageLoader } from './components/layout/PageLoader'
 import { PageSection } from './components/layout/PageSection'
@@ -26,8 +27,10 @@ function App() {
   const content = useMemo(
     () => (
       <>
-        <PageLoader />
-        <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
+        <div className="relative min-h-screen overflow-x-hidden bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
+          <AmbientSymbol />
+          <PageLoader />
+          <main className="relative z-10 min-h-screen text-[var(--text)] transition-colors duration-200">
         <Navbar
           activeSection={activeSection}
           onSelectSection={(sectionId) => {
@@ -155,7 +158,8 @@ function App() {
         <PageSection id="contact" className="mx-auto max-w-6xl">
           <h2 className="font-[Bangers] text-3xl text-[var(--primary)]">Contact</h2>
         </PageSection>
-      </main>
+          </main>
+        </div>
       </>
     ),
     [activeSection],

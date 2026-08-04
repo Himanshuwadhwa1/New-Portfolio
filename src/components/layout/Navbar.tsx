@@ -67,29 +67,41 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
             onClick={() => setIsOpen((value) => !value)}
             aria-label="Toggle navigation"
           >
-            <span className="mr-2 text-[var(--primary)]">&gt;</span>menu_
+            <span className="mr-2 text-[var(--primary)]">&gt;</span>{isOpen ? 'Close_' : 'Menu_'}
           </button>
         </div>
       </div>
 
       {isOpen ? (
-        <div className="border-t border-[color:var(--accent)]/10 bg-[var(--surface)]/95 px-4 py-4 md:hidden">
-          <div className="mx-auto flex max-w-6xl flex-col gap-2">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                type="button"
-                className={`rounded-xl px-3 py-3 text-left font-[JetBrains_Mono] text-sm ${
-                  activeSection === section.id ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : 'text-[var(--text)]'
-                }`}
-                onClick={() => {
-                  onSelectSection(section.id)
-                  setIsOpen(false)
-                }}
-              >
-                {section.label}
-              </button>
-            ))}
+        <div
+          className="md:hidden fixed left-0 right-0 z-50 px-4 py-4"
+          style={{
+            top: isScrolled ? '56px' : '80px',
+            background: 'color-mix(in srgb, var(--surface) 96%, transparent)',
+            borderTop: '1px solid rgba(0,0,0,0.04)',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <div className="mx-auto flex max-w-6xl flex-col gap-3">
+            
+
+            <div className="flex flex-col gap-2">
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  type="button"
+                  className={`w-full rounded-xl px-3 py-3 text-left font-[JetBrains_Mono] text-sm ${
+                    activeSection === section.id ? 'bg-[var(--primary)]/10 text-[var(--primary)]' : 'text-[var(--text)]'
+                  }`}
+                  onClick={() => {
+                    onSelectSection(section.id)
+                    setIsOpen(false)
+                  }}
+                >
+                  {section.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       ) : null}
