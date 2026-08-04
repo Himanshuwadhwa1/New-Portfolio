@@ -47,11 +47,11 @@ export function AmbientSymbol() {
           <img
             src={imagePath}
             alt=""
-            className="fixed top-[12vh] left-1/2 -translate-x-1/2 lg:left-auto lg:right-8 lg:translate-x-0 select-none"
+            className={`fixed ${theme === 'dark' ? 'top-[22vh] lg:top-[8vh]' : 'top-[35vh] lg:top-[16vh]'} left-1/2 -translate-x-1/2 lg:left-auto lg:right-8 lg:translate-x-0 select-none`}
             style={{
               width: 'clamp(180px, 36vw, 760px)',
               height: 'auto',
-              maxHeight: '80vh',
+              maxHeight: `${theme === 'dark' ? '90vh' : '80vh'}`,
               objectFit: 'contain',
               opacity: 0.92,
               filter: `saturate(0.94) contrast(0.96) ${theme === 'dark' ? 'brightness(2.43)' : ''}`,
