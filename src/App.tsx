@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { Navbar } from './components/layout/Navbar'
+import { PageLoader } from './components/layout/PageLoader'
 import { PageSection } from './components/layout/PageSection'
 import { Badge } from './components/ui/Badge'
 import { Button } from './components/ui/Button'
@@ -24,7 +25,9 @@ function App() {
 
   const content = useMemo(
     () => (
-      <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
+      <>
+        <PageLoader />
+        <main className="min-h-screen bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
         <Navbar
           activeSection={activeSection}
           onSelectSection={(sectionId) => {
@@ -153,6 +156,7 @@ function App() {
           <h2 className="font-[Bangers] text-3xl text-[var(--primary)]">Contact</h2>
         </PageSection>
       </main>
+      </>
     ),
     [activeSection],
   )

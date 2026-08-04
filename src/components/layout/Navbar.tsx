@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { ThemeToggle } from './ThemeToggle'
 
 export interface NavbarProps {
   activeSection: string
@@ -58,14 +59,17 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
           })}
         </nav>
 
-        <button
-          type="button"
-          className="rounded-full border border-[color:var(--accent)]/20 px-3 py-2 text-sm font-[JetBrains_Mono] text-[var(--muted)] md:hidden"
-          onClick={() => setIsOpen((value) => !value)}
-          aria-label="Toggle navigation"
-        >
-          <span className="mr-2 text-[var(--primary)]">&gt;</span>menu_
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="rounded-full border border-[color:var(--accent)]/20 px-3 py-2 text-sm font-[JetBrains_Mono] text-[var(--muted)] md:hidden"
+            onClick={() => setIsOpen((value) => !value)}
+            aria-label="Toggle navigation"
+          >
+            <span className="mr-2 text-[var(--primary)]">&gt;</span>menu_
+          </button>
+        </div>
       </div>
 
       {isOpen ? (
