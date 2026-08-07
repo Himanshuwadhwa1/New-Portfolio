@@ -69,3 +69,10 @@
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Super_Brigade_Condensed';
+  src: url('/assets/fonts/super-brigade/SuperBrigadeCondensed-ARwy2.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}

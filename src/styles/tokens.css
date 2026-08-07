@@ -6,6 +6,12 @@
   --accent-gold: #F2B705;
   --text: #0B1220;
   --muted: #5B6472;
+  /* Semantic aliases — map Metropolis tokens per theme */
+  --highlight: var(--accent-gold);
+  --emphasis: var(--accent);
+  --hero-bar-start: var(--primary);
+  --hero-bar-mid: var(--accent);
+  --hero-bar-end: var(--accent-gold);
 }
 
 :root[data-theme='dark'] {
@@ -16,4 +22,10 @@
   --accent-glow: #F5D67B;
   --text: #E6E8EC;
   --muted: #8A8F98;
+  /* Semantic aliases — map Gotham tokens per theme */
+  --highlight: var(--accent-glow);
+  --emphasis: var(--accent-glow);
+  --hero-bar-start: var(--accent-glow);
+  --hero-bar-mid: var(--primary);
+  --hero-bar-end: var(--accent-glow);
 }

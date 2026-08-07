@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, lazy, Suspense } from 'react'
 import { AmbientSymbol } from './components/layout/AmbientSymbol'
 import { Navbar } from './components/layout/Navbar'
 import { PageLoader } from './components/layout/PageLoader'
@@ -11,6 +11,8 @@ import { experience } from './data/experience'
 import { projects } from './data/projects'
 import { tools } from './data/tools'
 import { useActiveSection } from './hooks/useActiveSection'
+
+const Playground = lazy(() => import('./sections/Playground/Playground'))
 
 const sections = [
   { id: 'intro', label: 'Intro' },
@@ -152,7 +154,13 @@ function App() {
         </PageSection>
 
         <PageSection id="playground" className="mx-auto max-w-6xl">
-          <h2 className="font-[Bangers] text-3xl text-[var(--primary)]">Playground</h2>
+          <Suspense fallback={
+            <div className="flex items-center justify-center py-16">
+              <div className="h-6 w-6 animate-spin rounded-full border-2 border-[var(--primary)] border-t-transparent" />
+            </div>
+          }>
+            <Playground />
+          </Suspense>
         </PageSection>
 
         <PageSection id="contact" className="mx-auto max-w-6xl">

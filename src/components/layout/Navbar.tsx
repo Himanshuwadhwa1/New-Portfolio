@@ -27,9 +27,8 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
       style={{ background: 'linear-gradient(90deg, color-mix(in srgb, var(--surface) 92%, transparent), transparent 60%)' }}
     >
       <div
-        className={`mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-transform duration-200 ${
-          isScrolled ? 'transform -translate-y-0.5' : ''
-        }`}
+        className={`mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-transform duration-200 ${isScrolled ? 'transform -translate-y-0.5' : ''
+          }`}
       >
         <button
           type="button"
@@ -48,9 +47,8 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
                 key={section.id}
                 type="button"
                 onClick={() => onSelectSection(section.id)}
-                className={`relative px-3 py-2 text-sm font-[JetBrains_Mono] transition-colors ${
-                  isActive ? 'text-[var(--primary)]' : 'text-[var(--muted)] hover:text-[var(--primary)]'
-                }`}
+                className={`relative px-3 py-2 text-sm font-[JetBrains_Mono] transition-colors ${isActive ? 'text-[var(--primary)]' : 'text-[var(--muted)] hover:text-[var(--primary)]'
+                  }`}
                 aria-current={isActive ? 'page' : undefined}
               >
                 <span className="relative z-10 px-1">{section.label}</span>
@@ -96,11 +94,10 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
                 <button
                   key={section.id}
                   type="button"
-                  className={`w-full rounded-xl px-3 py-3 text-left font-[JetBrains_Mono] text-sm transition-colors ${
-                    activeSection === section.id
-                      ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
-                      : 'text-[var(--text)] hover:bg-[color:var(--surface)]/4'
-                  }`}
+                  className={`w-full rounded-xl px-3 py-3 text-left font-[JetBrains_Mono] text-sm transition-colors ${activeSection === section.id
+                    ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
+                    : 'text-[var(--text)] hover:bg-[color:var(--surface)]/4'
+                    }`}
                   onClick={() => {
                     onSelectSection(section.id)
                     setIsOpen(false)
