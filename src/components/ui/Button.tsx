@@ -14,7 +14,7 @@ export function Button({
   type = 'button',
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center rounded-full border font-[JetBrains_Mono] text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 disabled:cursor-not-allowed disabled:opacity-60'
+  const baseStyles = 'inline-flex items-center justify-center rounded-full border font-[JetBrainsMono] text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 disabled:cursor-not-allowed disabled:opacity-60'
 
   const variants = {
     primary: 'border-transparent bg-[var(--primary)] text-white hover:brightness-110',

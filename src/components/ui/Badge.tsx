@@ -14,7 +14,7 @@ export function Badge({ children, tone = 'default', className = '' }: BadgeProps
   }
 
   return (
-    <span className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-[JetBrains_Mono] uppercase tracking-[0.2em] ${tones[tone]} ${className}`.trim()}>
+    <span className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-[JetBrainsMono] uppercase tracking-[0.2em] ${tones[tone]} ${className}`.trim()}>
       {children}
     </span>
   )

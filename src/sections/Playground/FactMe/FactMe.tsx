@@ -42,7 +42,7 @@ export default function FactMe() {
         <button
           type="button"
           onClick={() => getRandomFact('dev')}
-          className="group relative inline-flex items-center gap-2.5 rounded-xl border border-[color:var(--primary)]/30 bg-[var(--primary)]/10 px-6 py-3.5 font-[JetBrains_Mono] text-sm font-medium text-[var(--primary)] transition-all duration-200 hover:border-[color:var(--primary)]/60 hover:bg-[var(--primary)]/20 hover:shadow-lg hover:shadow-[var(--primary)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/40"
+          className="group relative inline-flex items-center gap-2.5 rounded-xl border border-[color:var(--primary)]/30 bg-[var(--primary)]/10 px-6 py-3.5 font-[JetBrainsMono] text-sm font-medium text-[var(--primary)] transition-all duration-200 hover:border-[color:var(--primary)]/60 hover:bg-[var(--primary)]/20 hover:shadow-lg hover:shadow-[var(--primary)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/40"
         >
           <svg
             width="18"
@@ -64,7 +64,7 @@ export default function FactMe() {
         <button
           type="button"
           onClick={() => getRandomFact('hero')}
-          className="group relative inline-flex items-center gap-2.5 rounded-xl border border-[color:var(--emphasis)]/30 bg-[var(--emphasis)]/10 px-6 py-3.5 font-[JetBrains_Mono] text-sm font-medium text-[var(--emphasis)] transition-all duration-200 hover:border-[color:var(--emphasis)]/60 hover:bg-[var(--emphasis)]/20 hover:shadow-lg hover:shadow-[var(--emphasis)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--emphasis)]/40"
+          className="group relative inline-flex items-center gap-2.5 rounded-xl border border-[color:var(--emphasis)]/30 bg-[var(--emphasis)]/10 px-6 py-3.5 font-[JetBrainsMono] text-sm font-medium text-[var(--emphasis)] transition-all duration-200 hover:border-[color:var(--emphasis)]/60 hover:bg-[var(--emphasis)]/20 hover:shadow-lg hover:shadow-[var(--emphasis)]/10 focus:outline-none focus:ring-2 focus:ring-[var(--emphasis)]/40"
         >
           <svg
             width="18"
@@ -148,7 +148,7 @@ export default function FactMe() {
                 Click a button to{' '}
                 <span className="text-[var(--emphasis)]">discover something</span>
               </p>
-              <p className="mt-2 font-[JetBrains_Mono] text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
+              <p className="mt-2 font-[JetBrainsMono] text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
                 Dev Fact · Hero Fact
               </p>
             </motion.div>

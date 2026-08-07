@@ -103,7 +103,7 @@ export default function BugHunt() {
     return (
       <div className="flex flex-col items-center gap-4 py-8 text-center">
         <p className="font-[Bangers] text-2xl text-[var(--primary)]">All challenges done!</p>
-        <p className="font-[JetBrains_Mono] text-sm text-[var(--muted)]">
+        <p className="font-[JetBrainsMono] text-sm text-[var(--muted)]">
           Best streak: {bestStreak} • Total correct: {totalCorrect}/{challenges.length}
         </p>
         <Button variant="primary" size="sm" onClick={() => { setCurrentIndex(0); setRoundState('playing'); setSelectedLine(null); setStreak(0); setTotalCorrect(0) }}>
@@ -121,13 +121,13 @@ export default function BugHunt() {
       {/* Header: stats + timer */}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[color:var(--accent)]/15 bg-[var(--surface)] px-5 py-3">
         <div className="flex gap-5">
-          <span className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <span className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             STREAK <span className="ml-1 text-base font-bold text-[var(--primary)]">{streak}</span>
           </span>
-          <span className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <span className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             BEST <span className="ml-1 text-base font-bold text-[var(--primary)]">{bestStreak}</span>
           </span>
-          <span className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <span className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             ROUND{' '}
             <span className="ml-1 text-base font-bold text-[var(--primary)]">{currentIndex + 1}</span>
             <span className="text-[var(--muted)]">/{challenges.length}</span>
@@ -163,7 +163,7 @@ export default function BugHunt() {
       {/* Code block */}
       <div className="overflow-hidden rounded-xl border border-[color:var(--accent)]/15 bg-[var(--surface)]">
         <div className="border-b border-[color:var(--accent)]/10 px-4 py-2">
-          <p className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <p className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             Find the bug — click the line with the issue
           </p>
         </div>
@@ -187,7 +187,7 @@ export default function BugHunt() {
                 type="button"
                 disabled={isRoundOver}
                 onClick={() => handleLineClick(i)}
-                className={`flex w-full items-start gap-3 px-4 py-2.5 text-left font-[JetBrains_Mono] text-sm transition-colors ${
+                className={`flex w-full items-start gap-3 px-4 py-2.5 text-left font-[JetBrainsMono] text-sm transition-colors ${
                   isRoundOver
                     ? 'cursor-default'
                     : 'cursor-pointer hover:bg-[var(--primary)]/5'
@@ -225,7 +225,7 @@ export default function BugHunt() {
               {roundState === 'wrong' && '✗ Wrong line'}
               {roundState === 'timeout' && "⏰ Time's up!"}
             </p>
-            <p className="mt-1 font-[JetBrains_Mono] text-xs font-medium text-[var(--muted)]">
+            <p className="mt-1 font-[JetBrainsMono] text-xs font-medium text-[var(--muted)]">
               {challenge.bugType}
             </p>
             <p className="mt-2 text-sm leading-6 text-[var(--text)]">{challenge.explanation}</p>

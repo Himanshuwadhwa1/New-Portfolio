@@ -32,7 +32,7 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
       >
         <button
           type="button"
-          className="inline-flex items-center gap-3 rounded-full border border-[color:var(--accent)]/12 bg-[color:var(--surface)]/6 px-3 py-2 text-sm font-[JetBrains_Mono] leading-5 text-[var(--primary)] transition-shadow hover:shadow-sm"
+          className="inline-flex items-center gap-3 rounded-full border border-[color:var(--accent)]/12 bg-[color:var(--surface)]/6 px-3 py-2 text-sm font-[JetBrainsMono] leading-5 text-[var(--primary)] transition-shadow hover:shadow-sm"
           onClick={() => onSelectSection('intro')}
           aria-label="Go to intro"
         >
@@ -47,7 +47,7 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
                 key={section.id}
                 type="button"
                 onClick={() => onSelectSection(section.id)}
-                className={`relative px-3 py-2 text-sm font-[JetBrains_Mono] transition-colors ${isActive ? 'text-[var(--primary)]' : 'text-[var(--muted)] hover:text-[var(--primary)]'
+                className={`relative px-3 py-2 text-sm font-[JetBrainsMono] transition-colors ${isActive ? 'text-[var(--primary)]' : 'text-[var(--muted)] hover:text-[var(--primary)]'
                   }`}
                 aria-current={isActive ? 'page' : undefined}
               >
@@ -66,7 +66,7 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
           <ThemeToggle />
           <button
             type="button"
-            className="md:hidden inline-flex items-center gap-2 rounded-lg border border-[color:var(--accent)]/12 px-3 py-2 text-sm font-[JetBrains_Mono] text-[var(--muted)] transition-colors hover:bg-[color:var(--surface)]/6"
+            className="md:hidden inline-flex items-center gap-2 rounded-lg border border-[color:var(--accent)]/12 px-3 py-2 text-sm font-[JetBrainsMono] text-[var(--muted)] transition-colors hover:bg-[color:var(--surface)]/6"
             onClick={() => setIsOpen((value) => !value)}
             aria-expanded={isOpen}
             aria-label="Toggle navigation"
@@ -94,7 +94,7 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
                 <button
                   key={section.id}
                   type="button"
-                  className={`w-full rounded-xl px-3 py-3 text-left font-[JetBrains_Mono] text-sm transition-colors ${activeSection === section.id
+                  className={`w-full rounded-xl px-3 py-3 text-left font-[JetBrainsMono] text-sm transition-colors ${activeSection === section.id
                     ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
                     : 'text-[var(--text)] hover:bg-[color:var(--surface)]/4'
                     }`}

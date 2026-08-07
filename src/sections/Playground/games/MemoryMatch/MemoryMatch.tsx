@@ -352,15 +352,15 @@ export default function MemoryMatch() {
       {/* Stats bar */}
       <div className="flex w-full items-center justify-between rounded-xl border border-[color:var(--accent)]/15 bg-[var(--surface)] px-5 py-3">
         <div className="flex gap-4 sm:gap-6">
-          <span className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <span className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             MOVES <span className="ml-1 text-base font-bold text-[var(--primary)]">{moves}</span>
           </span>
-          <span className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <span className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             PAIRS{' '}
             <span className="ml-1 text-base font-bold text-[var(--primary)]">{matchedCount / 2}</span>
             <span className="text-[var(--muted)]">/8</span>
           </span>
-          <span className="font-[JetBrains_Mono] text-xs text-[var(--muted)]">
+          <span className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             TIME <span className="ml-1 text-base font-bold text-[var(--primary)]">{formatTime(timeElapsed)}</span>
           </span>
         </div>
@@ -430,7 +430,7 @@ export default function MemoryMatch() {
                   <div className={`text-[var(--primary)] ${card.isMatched ? 'opacity-60' : gaveUp ? 'text-red-500 opacity-60' : ''}`}>
                     {tech.icon}
                   </div>
-                  <span className="hidden text-[9px] font-[JetBrains_Mono] text-[var(--muted)] sm:block">
+                  <span className="hidden text-[9px] font-[JetBrainsMono] text-[var(--muted)] sm:block">
                     {tech.name}
                   </span>
                 </div>
@@ -448,7 +448,7 @@ export default function MemoryMatch() {
           className="w-full rounded-2xl border border-[color:var(--primary)]/30 bg-[var(--primary)]/10 p-6 text-center"
         >
           <p className="font-[Bangers] text-2xl text-[var(--primary)]">🎉 You matched them all!</p>
-          <p className="mt-1 font-[JetBrains_Mono] text-sm text-[var(--muted)]">
+          <p className="mt-1 font-[JetBrainsMono] text-sm text-[var(--muted)]">
             Completed in {moves} moves • Time invested: {formatTime(timeElapsed)}
           </p>
           <div className="mt-4">
@@ -467,7 +467,7 @@ export default function MemoryMatch() {
           className="w-full rounded-2xl border border-red-500/30 bg-red-500/10 p-6 text-center"
         >
           <p className="font-[Bangers] text-2xl text-red-500">Game Over — You Gave Up</p>
-          <p className="mt-2 font-[JetBrains_Mono] text-sm text-[var(--muted)]">
+          <p className="mt-2 font-[JetBrainsMono] text-sm text-[var(--muted)]">
             Time invested: {formatTime(timeElapsed)} • {moves} moves made
           </p>
           <p className="mt-2 text-xs italic text-[var(--muted)]">

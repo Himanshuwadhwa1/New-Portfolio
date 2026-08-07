@@ -42,11 +42,11 @@ function App() {
         />
 
         <PageSection id="intro" className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col justify-center">
-          <p className="mb-4 font-[JetBrains_Mono] text-sm uppercase tracking-[0.3em] text-[var(--muted)]">
+          <p className="mb-4 font-[JetBrainsMono] text-sm uppercase tracking-[0.3em] text-[var(--muted)]">
             Software engineer • building systems and interfaces
           </p>
           <h1 className="max-w-3xl font-[Bangers] text-5xl leading-tight text-[var(--primary)] sm:text-6xl">
-            I craft resilient products with clarity and intent.
+            I craft resilient <span className='text-[color:var(--accent)]'>products</span> with clarity  <span className='text-[color:var(--accent)]'>and</span> intent.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)]">
             I build thoughtful web experiences, product tooling, and AI-assisted workflows with a strong focus on performance, maintainability, and calm user experience.
@@ -75,9 +75,9 @@ function App() {
                 <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
                   <div>
                     <h3 className="font-[Bangers] text-2xl text-[var(--primary)]">{entry.role}</h3>
-                    <p className="font-[JetBrains_Mono] text-sm text-[var(--muted)]">{entry.company}</p>
+                    <p className="font-[JetBrainsMono] text-sm text-[var(--muted)]">{entry.company}</p>
                   </div>
-                  <p className="font-[JetBrains_Mono] text-sm text-[var(--muted)]">
+                  <p className="font-[JetBrainsMono] text-sm text-[var(--muted)]">
                     {entry.startDate} — {entry.endDate}
                   </p>
                 </div>
@@ -137,7 +137,7 @@ function App() {
               const items = tools.filter((tool) => tool.category === category)
               return (
                 <div key={category}>
-                  <h3 className="mb-3 font-[JetBrains_Mono] text-sm uppercase tracking-[0.24em] text-[var(--primary)]">
+                  <h3 className="mb-3 font-[JetBrainsMono] text-sm uppercase tracking-[0.24em] text-[var(--primary)]">
                     {category}
                   </h3>
                   <div className="flex flex-wrap gap-2">

@@ -22,7 +22,7 @@ export function SectionHeading({
   return (
     <div className={`mb-8 flex flex-col gap-3 ${alignment} ${className}`.trim()}>
       {eyebrow ? (
-        <p className="font-[JetBrains_Mono] text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
+        <p className="font-[JetBrainsMono] text-xs uppercase tracking-[0.3em] text-[var(--muted)]">
           {eyebrow}
         </p>
       ) : null}
