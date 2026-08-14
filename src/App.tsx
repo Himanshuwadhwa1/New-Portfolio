@@ -11,6 +11,7 @@ import { experience } from './data/experience'
 import { projects } from './data/projects'
 import { tools } from './data/tools'
 import { useActiveSection } from './hooks/useActiveSection'
+import { Contact } from './sections/Contact/Contact'
 
 const Playground = lazy(() => import('./sections/Playground/Playground'))
 
@@ -164,7 +165,7 @@ function App() {
         </PageSection>
 
         <PageSection id="contact" className="mx-auto max-w-6xl">
-          <h2 className="font-[Bangers] text-3xl text-[var(--primary)]">Contact</h2>
+          <Contact />
         </PageSection>
           </main>
         </div>
