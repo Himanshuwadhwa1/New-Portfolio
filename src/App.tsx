@@ -1,4 +1,6 @@
 import { useMemo, lazy, Suspense } from 'react'
+import { EasterEggTapLogo } from './components/effects/EasterEggTapLogo'
+import { IpRevealButton } from './components/effects/IpRevealButton'
 import { AmbientSymbol } from './components/layout/AmbientSymbol'
 import { Navbar } from './components/layout/Navbar'
 import { PageLoader } from './components/layout/PageLoader'
@@ -11,6 +13,7 @@ import { experience } from './data/experience'
 import { projects } from './data/projects'
 import { tools } from './data/tools'
 import { useActiveSection } from './hooks/useActiveSection'
+import { useTapCounter } from './hooks/useTapCounter'
 import { Contact } from './sections/Contact/Contact'
 
 const Playground = lazy(() => import('./sections/Playground/Playground'))
@@ -26,6 +29,7 @@ const sections = [
 
 function App() {
   const activeSection = useActiveSection(sections.map((section) => section.id))
+  const { handleTap, isTriggered, isWobbling, resetTaps } = useTapCounter(3)
 
   const content = useMemo(
     () => (
@@ -33,6 +37,8 @@ function App() {
         <div className="relative min-h-screen overflow-x-hidden bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
           <AmbientSymbol />
           <PageLoader />
+          <EasterEggTapLogo isActive={isTriggered} onComplete={resetTaps} />
+          <IpRevealButton />
           <main className="relative z-10 min-h-screen text-[var(--text)] transition-colors duration-200">
         <Navbar
           activeSection={activeSection}
@@ -40,6 +46,8 @@ function App() {
             document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
           }}
           sections={sections}
+          onTapLogo={handleTap}
+          isWobbling={isWobbling}
         />
 
         <PageSection id="intro" className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col justify-center">
@@ -171,7 +179,7 @@ function App() {
         </div>
       </>
     ),
-    [activeSection],
+    [activeSection, isTriggered, isWobbling, handleTap, resetTaps],
   )
 
   return content

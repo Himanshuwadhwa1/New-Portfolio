@@ -6,9 +6,11 @@ export interface NavbarProps {
   activeSection: string
   onSelectSection: (sectionId: string) => void
   sections: Array<{ id: string; label: string }>
+  onTapLogo?: () => void
+  isWobbling?: boolean
 }
 
-export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps) {
+export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, isWobbling }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -30,14 +32,19 @@ export function Navbar({ activeSection, onSelectSection, sections }: NavbarProps
         className={`mx-auto flex h-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8 transition-transform duration-200 ${isScrolled ? 'transform -translate-y-0.5' : ''
           }`}
       >
-        <button
+        <motion.button
           type="button"
+          animate={isWobbling ? { rotate: [-2, 2, -2, 2, 0], scale: [1, 1.05, 1] } : {}}
+          transition={{ duration: 0.3 }}
           className="inline-flex items-center gap-3 rounded-full border border-[color:var(--accent)]/12 bg-[color:var(--surface)]/6 px-3 py-2 text-sm font-[JetBrainsMono] leading-5 text-[var(--primary)] transition-shadow hover:shadow-sm"
-          onClick={() => onSelectSection('intro')}
+          onClick={() => {
+            onTapLogo?.()
+            onSelectSection('intro')
+          }}
           aria-label="Go to intro"
         >
           <span className="mr-2">&gt;</span>Himanshu Wadhwa<span className="ml-2">&lt;</span>
-        </button>
+        </motion.button>
 
         <nav className="hidden items-center gap-4 md:flex">
           {sections.map((section) => {
