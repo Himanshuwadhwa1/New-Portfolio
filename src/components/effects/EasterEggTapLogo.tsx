@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import batmanSvg from '../../assets/icons/batman.svg'
 import supermanSvg from '../../assets/icons/superman.svg'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
@@ -13,6 +13,38 @@ export interface EasterEggTapLogoProps {
 export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps) {
   const { theme } = useTheme()
   const prefersReducedMotion = useReducedMotion()
+  const [beamAngle, setBeamAngle] = useState(280)
+
+  useEffect(() => {
+    const updateBeamAngle = () => {
+      // Screen space: origin (0,0) top-left, X right, Y down
+      // Bottom-right corner = (w, h), Center = (w/2, h/2)
+      // Vector from BR to Center: dx = -w/2, dy = -h/2
+      const w = window.innerWidth
+      const h = window.innerHeight
+      
+      // Math.atan2(dy, dx) in screen coordinates:
+      // dx = -w, dy = -h points Up-Left into 3rd quadrant (-180° to -90°).
+      const rad = Math.atan2(-h, -w)
+      const cartesianDeg = rad * (180 / Math.PI) // e.g. -135° for square, -145° for tall screen
+      
+      // In CSS conic-gradient at (100% 100%):
+      // 0deg = straight UP (-Y direction, cartesian -90°)
+      // 90deg = straight RIGHT (+X direction, cartesian 0°)
+      // 270deg = straight LEFT (-X direction, cartesian -180°)
+      // Conic Angle = (cartesianDeg + 90 + 360) % 360
+      const conicCenter = (cartesianDeg + 90 + 360) % 360 // e.g. -135 + 90 = -45 -> 315°
+      
+      // Beam width is 33deg (transparent 0 -> peak 17 -> transparent 33), so beam center is at +16.5deg
+      // To center the peak brightness at conicCenter, set start angle = conicCenter - 16.5
+      const startAngle = (conicCenter - 16.5 + 360) % 360
+      setBeamAngle(startAngle)
+    }
+
+    updateBeamAngle()
+    window.addEventListener('resize', updateBeamAngle)
+    return () => window.removeEventListener('resize', updateBeamAngle)
+  }, [])
 
   useEffect(() => {
     if (!isActive) return
@@ -111,7 +143,7 @@ export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps
               className="absolute inset-0 z-0 pointer-events-none"
               style={{
                 WebkitMaskImage: 'radial-gradient(circle at 100% 100%, black 0%, black 20%, transparent 50%)',
-                maskImage: 'radial-gradient(circle at 100% 100%, black 0%, black 50%, transparent 75%)',
+                maskImage: 'radial-gradient(circle at 100% 100%, black 0%, black 20%, transparent 50%)',
               }}
             >
               <motion.div
@@ -120,10 +152,9 @@ export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 className="absolute inset-0 z-0 pointer-events-none"
                 style={{
-                  background: 'conic-gradient(from 280deg at 100% 100%, transparent 0deg, rgba(232, 197, 71, 0.75) 10deg, rgba(255, 235, 140, 0.98) 17deg, rgba(232, 197, 71, 0.75) 22deg, transparent 33deg)',
+                  background: `conic-gradient(from ${beamAngle}deg at 100% 100%, transparent 0deg, rgba(232, 197, 71, 0.75) 10deg, rgba(255, 235, 140, 0.98) 17deg, rgba(232, 197, 71, 0.75) 22deg, transparent 33deg)`,
                 }}
               />
-
             </div>
 
             {/* Diffused outer glow for searchlight atmospheric volume centered along 315deg */}
