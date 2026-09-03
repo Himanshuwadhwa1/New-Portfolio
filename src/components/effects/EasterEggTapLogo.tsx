@@ -106,25 +106,34 @@ export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps
         ) : (
           /* Dark Mode: Vivid Conic Gradient Searchlight Spotlight from Bottom-Right to Center Modal */
           <div className="relative h-full w-full overflow-hidden flex items-center justify-center">
-            {/* Main Conic Spotlight Beam from Bottom-Right corner pointing directly to Center Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, ease: 'easeOut' }}
+            {/* Main Conic Spotlight Beam from Bottom-Right corner stopped at Center Modal using radial mask */}
+            <div 
               className="absolute inset-0 z-0 pointer-events-none"
               style={{
-                background: 'conic-gradient(from 295deg at 100% 100%, transparent 0deg, rgba(232, 197, 71, 0.75) 15deg, rgba(255, 235, 140, 0.98) 25deg, rgba(232, 197, 71, 0.75) 35deg, transparent 50deg)',
+                WebkitMaskImage: 'radial-gradient(circle at 100% 100%, black 0%, black 20%, transparent 50%)',
+                maskImage: 'radial-gradient(circle at 100% 100%, black 0%, black 50%, transparent 75%)',
               }}
-            />
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="absolute inset-0 z-0 pointer-events-none"
+                style={{
+                  background: 'conic-gradient(from 280deg at 100% 100%, transparent 0deg, rgba(232, 197, 71, 0.75) 10deg, rgba(255, 235, 140, 0.98) 17deg, rgba(232, 197, 71, 0.75) 22deg, transparent 33deg)',
+                }}
+              />
 
-            {/* Diffused outer glow for searchlight atmospheric volume */}
-            <div
+            </div>
+
+            {/* Diffused outer glow for searchlight atmospheric volume centered along 315deg */}
+            {/* <div
               className="absolute inset-0 z-0 pointer-events-none opacity-80"
               style={{
-                background: 'conic-gradient(from 285deg at 100% 100%, transparent 0deg, rgba(232, 197, 71, 0.4) 20deg, rgba(245, 214, 123, 0.5) 32deg, rgba(232, 197, 71, 0.3) 45deg, transparent 65deg)',
+                background: 'conic-gradient(from 29deg at 100% 100%, transparent 0deg, rgba(232, 197, 71, 0.4) 15deg, rgba(245, 214, 123, 0.5) 25deg, rgba(232, 197, 71, 0.3) 35deg, transparent 50deg)',
                 filter: 'blur(30px)',
               }}
-            />
+            /> */}
 
             {/* Projected Bat-Signal Circle & Card positioned top-left/centered gracefully for all breakpoints */}
             <motion.div
