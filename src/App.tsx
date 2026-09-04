@@ -50,18 +50,18 @@ function App() {
             />
 
             <PageSection id="intro" className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col justify-center">
-              <p className="mb-4 font-[JetBrainsMono] text-sm uppercase tracking-[0.3em] text-[var(--muted)]">
+              <p className="mb-4 font-[JetBrainsMono] text-xs sm:text-sm uppercase tracking-[0.2em] text-[var(--muted)]">
                 Software engineer • building systems and interfaces
               </p>
               <h1 className="max-w-3xl font-[Bangers] text-5xl leading-tight text-[var(--primary)] sm:text-6xl">
-                I craft resilient <span className='text-[color:var(--accent)]'>products</span> with clarity  <span className='text-[color:var(--accent)]'>and</span> intent.
+                I craft resilient <span className="text-[color:var(--accent)]">products</span> with clarity <span className="text-[color:var(--accent)]">and</span> intent.
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--muted)]">
+              <p className="mt-6 max-w-2xl text-base sm:text-lg leading-8 text-[var(--muted)]">
                 I build thoughtful web experiences, product tooling, and AI-assisted workflows with a strong focus on performance, maintainability, and calm user experience.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button variant="primary" onClick={() => window.open('./resume.pdf', '_blank')}>
-                  View Resume
+                <Button variant="primary" as="a" href="./resume.pdf" download="Himanshu_Wadhwa_Resume.pdf">
+                  Download Resume
                 </Button>
                 <Button variant="secondary" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
                   View Projects

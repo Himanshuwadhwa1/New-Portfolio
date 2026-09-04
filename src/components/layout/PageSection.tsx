@@ -8,7 +8,7 @@ export interface PageSectionProps {
 
 export function PageSection({ id, children, className = '' }: PageSectionProps) {
   return (
-    <section id={id} className={`scroll-mt-24 px-6 py-20 sm:px-8 lg:px-10 ${className}`.trim()}>
+    <section id={id} className={`scroll-mt-24 px-4 py-12 sm:px-8 sm:py-20 lg:px-10 ${className}`.trim()}>
       {children}
     </section>
   )
