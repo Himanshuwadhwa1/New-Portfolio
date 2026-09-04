@@ -15,7 +15,7 @@ export function ThemeToggle() {
       aria-label="Toggle Superman/Batman theme"
       aria-pressed={theme === 'dark'}
       className="flex items-center justify-center rounded-full border border-[color:var(--accent)]/20 bg-[var(--surface)]/80 p-2 text-[var(--primary)] shadow-sm transition-colors"
-      whileTap={{ scale: 0.94 }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.94 }}
       transition={{ type: 'spring', stiffness: 260, damping: 20 }}
     >
       <motion.span

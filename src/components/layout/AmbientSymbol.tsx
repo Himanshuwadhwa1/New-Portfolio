@@ -18,7 +18,6 @@ export function AmbientSymbol() {
   // back to the abstract SVG symbol already in assets.
   useEffect(() => {
     let mounted = true
-    setImageLoaded(false)
 
     const img = new Image()
     img.src = imagePath

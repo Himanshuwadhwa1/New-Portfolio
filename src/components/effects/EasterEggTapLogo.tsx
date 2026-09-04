@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useMemo } from 'react'
 import batmanSvg from '../../assets/icons/batman.svg'
 import supermanSvg from '../../assets/icons/superman.svg'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
@@ -15,28 +15,25 @@ export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps
   const prefersReducedMotion = useReducedMotion()
   const [beamAngle, setBeamAngle] = useState(280)
 
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 28 }, (_, i) => ({
+        id: i,
+        x: `${(i % 14) * 7.5 + ((i * 3 + 1) % 5)}%`,
+        scale: 0.5 + ((i * 7) % 7) / 10,
+        duration: 2.0 + ((i * 3) % 15) / 10,
+        delay: ((i * 2) % 10) / 10,
+      })),
+    [],
+  )
+
   useEffect(() => {
     const updateBeamAngle = () => {
-      // Screen space: origin (0,0) top-left, X right, Y down
-      // Bottom-right corner = (w, h), Center = (w/2, h/2)
-      // Vector from BR to Center: dx = -w/2, dy = -h/2
       const w = window.innerWidth
       const h = window.innerHeight
-      
-      // Math.atan2(dy, dx) in screen coordinates:
-      // dx = -w, dy = -h points Up-Left into 3rd quadrant (-180° to -90°).
       const rad = Math.atan2(-h, -w)
-      const cartesianDeg = rad * (180 / Math.PI) // e.g. -135° for square, -145° for tall screen
-      
-      // In CSS conic-gradient at (100% 100%):
-      // 0deg = straight UP (-Y direction, cartesian -90°)
-      // 90deg = straight RIGHT (+X direction, cartesian 0°)
-      // 270deg = straight LEFT (-X direction, cartesian -180°)
-      // Conic Angle = (cartesianDeg + 90 + 360) % 360
-      const conicCenter = (cartesianDeg + 90 + 360) % 360 // e.g. -135 + 90 = -45 -> 315°
-      
-      // Beam width is 33deg (transparent 0 -> peak 17 -> transparent 33), so beam center is at +16.5deg
-      // To center the peak brightness at conicCenter, set start angle = conicCenter - 16.5
+      const cartesianDeg = rad * (180 / Math.PI)
+      const conicCenter = (cartesianDeg + 90 + 360) % 360
       const startAngle = (conicCenter - 16.5 + 360) % 360
       setBeamAngle(startAngle)
     }
@@ -93,14 +90,14 @@ export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps
           /* Light Mode: Kryptonite Surge & Floating Shield */
           <div className="relative h-full w-full flex items-center justify-center">
             {/* Ambient Particles */}
-            {[...Array(28)].map((_, i) => (
+            {particles.map((p) => (
               <motion.div
-                key={i}
+                key={p.id}
                 initial={{
                   y: '100vh',
-                  x: `${(i % 14) * 7.5 + Math.random() * 5}%`,
+                  x: p.x,
                   opacity: 0,
-                  scale: Math.random() * 0.7 + 0.5,
+                  scale: p.scale,
                 }}
                 animate={{
                   y: ['100vh', '-10vh'],
@@ -108,9 +105,9 @@ export function EasterEggTapLogo({ isActive, onComplete }: EasterEggTapLogoProps
                   scale: [0.5, 1.2, 0.4],
                 }}
                 transition={{
-                  duration: 2.0 + Math.random() * 1.5,
+                  duration: p.duration,
                   repeat: Infinity,
-                  delay: Math.random() * 1.0,
+                  delay: p.delay,
                   ease: 'easeInOut',
                 }}
                 className="absolute h-10 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_#34d399]"

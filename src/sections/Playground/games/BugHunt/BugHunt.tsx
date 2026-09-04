@@ -47,8 +47,6 @@ export default function BugHunt() {
   useEffect(() => {
     if (roundState !== 'playing' || !challenge) return
 
-    setTimeLeft(timerDuration)
-
     timerRef.current = setInterval(() => {
       setTimeLeft((prev) => {
         if (prev <= 0.1) {
@@ -64,7 +62,7 @@ export default function BugHunt() {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current)
     }
-  }, [roundState, challenge, timerDuration])
+  }, [roundState, challenge])
 
   const handleLineClick = useCallback(
     (lineIndex: number) => {
@@ -88,15 +86,13 @@ export default function BugHunt() {
   )
 
   const nextChallenge = useCallback(() => {
-    if (currentIndex + 1 >= challenges.length) {
-      // Loop back with re-shuffle
-      setCurrentIndex(0)
-    } else {
-      setCurrentIndex((i) => i + 1)
-    }
+    const nextIdx = currentIndex + 1 >= challenges.length ? 0 : currentIndex + 1
+    const nextDiff = challenges[nextIdx]?.difficulty ?? 'easy'
+    setCurrentIndex(nextIdx)
+    setTimeLeft(getTimerDuration(nextDiff))
     setRoundState('playing')
     setSelectedLine(null)
-  }, [currentIndex, challenges.length])
+  }, [currentIndex, challenges])
 
   // Finished all — show summary
   if (!challenge) {

@@ -50,11 +50,12 @@ export function Contact() {
         if (value.trim().startsWith(' ')) return 'Name cannot start with a space'
         if (/^\d/.test(value.trim())) return 'Name cannot start with Number'
         return undefined
-      case 'email':
+      case 'email': {
         if (!value.trim()) return 'Email is required'
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailRegex.test(value)) return 'Please enter a valid email address'
         return undefined
+      }
       case 'message':
         if (!value.trim()) return 'Message is required'
         if (value.trim().length < 10) return 'Message must be at least 10 characters'
@@ -96,7 +97,7 @@ export function Contact() {
             break
           case 'message':
             if (validateForm()) {
-              handleSubmit(e as any)
+              handleSubmit(e)
             }
             break
         }
@@ -152,7 +153,7 @@ export function Contact() {
       } else {
         setSubmitStatus('error')
       }
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -342,12 +343,12 @@ export function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex items-center justify-center rounded-full border border-[color:var(--accent)]/40 bg-[var(--secondary)] p-2.5 sm:p-3 transition-all duration-300 hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 hover:shadow-lg hover:shadow-[var(--primary)]/30"
+                  className="group relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[color:var(--accent)]/40 bg-[var(--surface)] p-2.5 sm:p-3 transition-all duration-300 hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 hover:shadow-lg hover:shadow-[var(--primary)]/30"
                   aria-label={link.name}
                 >
                   <img 
                     src={link.icon as string} 
-                    alt={link.name}
+                    alt=""
                     className="h-5 w-5 sm:h-6 sm:w-6 transition-all duration-300 group-hover:scale-110 group-hover:brightness-110"
                   />
                 </a>

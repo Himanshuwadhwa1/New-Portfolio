@@ -17,7 +17,7 @@ export function Button({
   const baseStyles = 'inline-flex items-center justify-center rounded-full border font-[JetBrainsMono] text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]/40 disabled:cursor-not-allowed disabled:opacity-60'
 
   const variants = {
-    primary: 'border-transparent bg-[var(--primary)] text-white hover:brightness-110',
+    primary: 'border-transparent bg-[var(--primary)] text-[var(--bg)] hover:brightness-110',
     secondary: 'border-[color:var(--accent)]/30 bg-[var(--surface)] text-[var(--primary)] hover:border-[var(--accent)]/60',
     ghost: 'border-transparent bg-transparent text-[var(--text)] hover:bg-[var(--surface)]',
   }

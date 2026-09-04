@@ -33,7 +33,7 @@ export function useTapCounter(targetTaps = 3, resetTimeoutMs = 3000) {
     tapCount,
     handleTap,
     resetTaps,
-    isTriggered: true,
+    isTriggered: tapCount >= targetTaps,
     isWobbling: tapCount >= 1 && tapCount < targetTaps,
   }
 }

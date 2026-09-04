@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { useReducedMotion } from '../../hooks/useReducedMotion'
 import { ThemeToggle } from './ThemeToggle'
 
 export interface NavbarProps {
@@ -13,6 +14,7 @@ export interface NavbarProps {
 export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, isWobbling }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const prefersReduced = useReducedMotion()
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8)
@@ -34,7 +36,7 @@ export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, is
       >
         <motion.button
           type="button"
-          animate={isWobbling ? { rotate: [-2, 2, -2, 2, 0], scale: [1, 1.05, 1] } : {}}
+          animate={!prefersReduced && isWobbling ? { rotate: [-2, 2, -2, 2, 0], scale: [1, 1.05, 1] } : {}}
           transition={{ duration: 0.3 }}
           className="inline-flex items-center gap-3 rounded-full border border-[color:var(--accent)]/12 bg-[color:var(--surface)]/6 px-3 py-2 text-sm font-[JetBrainsMono] leading-5 text-[var(--primary)] transition-shadow hover:shadow-sm"
           onClick={() => {
@@ -60,7 +62,7 @@ export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, is
               >
                 <span className="relative z-10 px-1">{section.label}</span>
                 <motion.span
-                  layoutId="active-section-underline"
+                  layoutId={prefersReduced ? undefined : "active-section-underline"}
                   className={`absolute left-1/3 top-full -translate-x-1/2 mt-2 h-0.5 rounded-full bg-[var(--accent-glow)] transition-all`}
                   style={{ width: isActive ? '30%' : '0%' }}
                 />
@@ -73,22 +75,20 @@ export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, is
           <ThemeToggle />
           <button
             type="button"
-            className="md:hidden inline-flex items-center gap-2 rounded-lg border border-[color:var(--accent)]/12 px-3 py-2 text-sm font-[JetBrainsMono] text-[var(--muted)] transition-colors hover:bg-[color:var(--surface)]/6"
+            className="md:hidden inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-lg border border-[color:var(--accent)]/12 px-3 py-2 text-sm font-[JetBrainsMono] text-[var(--muted)] transition-colors hover:bg-[color:var(--surface)]/6"
             onClick={() => setIsOpen((value) => !value)}
             aria-expanded={isOpen}
             aria-label="Toggle navigation"
           >
-            <span className="text-[var(--primary)]">{isOpen ? '✕' : '☰'}</span>
-            <span className="sr-only">Menu</span>
+            <span className="text-[var(--primary)] font-bold">{isOpen ? '> menu_ [close]' : '> menu_'}</span>
           </button>
         </div>
       </div>
 
       {isOpen ? (
         <div
-          className="md:hidden fixed left-0 right-0 z-50 px-4 py-4"
+          className="md:hidden fixed left-0 right-0 top-16 z-50 px-4 py-4"
           style={{
-            top: isScrolled ? '56px' : '80px',
             background: 'color-mix(in srgb, var(--surface) 98%, transparent)',
             borderTop: '1px solid rgba(0,0,0,0.04)',
             backdropFilter: 'blur(8px)',

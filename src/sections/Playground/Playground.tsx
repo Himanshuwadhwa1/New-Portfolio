@@ -46,9 +46,9 @@ export default function Playground() {
               key={tab.id}
               type="button"
               onClick={() => setActiveTab(tab.id)}
-              className={`relative rounded-lg px-4 py-2 font-[JetBrainsMono] text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30 ${
+              className={`relative inline-flex items-center min-h-[44px] rounded-lg px-4 py-2 font-[JetBrainsMono] text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30 ${
                 activeTab === tab.id
-                  ? 'text-white'
+                  ? 'text-[var(--bg)] font-semibold'
                   : 'text-[var(--muted)] hover:text-[var(--text)]'
               }`}
             >
