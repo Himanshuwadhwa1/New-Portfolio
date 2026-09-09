@@ -7,10 +7,15 @@ export interface ModalProps {
   title?: string
   children: React.ReactNode
   /** Panel max-width. Defaults to 'md' (~448px, roughly 1/3 of desktop viewport). */
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'xl'
 }
 
-const SIZE_MAP = { sm: 'max-w-sm', md: 'max-w-md', lg: 'max-w-lg' } as const
+const SIZE_MAP = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-lg lg:max-w-xl',
+} as const
 
 export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalProps) {
   useEffect(() => {
@@ -62,28 +67,33 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={onClose}>
       <div
-        className={`w-full ${SIZE_MAP[size]} rounded-2xl border border-[color:var(--accent)]/20 bg-[var(--surface)] p-6 shadow-2xl`}
+        className={`w-full ${SIZE_MAP[size]} flex max-h-[85vh] flex-col rounded-2xl border border-[color:var(--accent)]/20 bg-[var(--surface)] p-5 sm:p-6 shadow-2xl`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? 'modal-title' : undefined}
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex items-start justify-between gap-4">
+        {/* Sticky Header */}
+        <div className="flex shrink-0 items-center justify-between gap-4 pb-2 border-b border-[color:var(--accent)]/15">
           {title ? (
-            <h2 id="modal-title" className="font-[Bangers] text-2xl text-[var(--primary)]">
+            <h2 id="modal-title" className="truncate font-[Bangers] text-2xl text-[var(--primary)]">
               {title}
             </h2>
           ) : null}
           <button
             type="button"
-            className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[color:var(--accent)]/20 text-lg text-[var(--muted)] transition-colors hover:text-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[color:var(--accent)]/20 text-lg text-[var(--muted)] transition-colors hover:border-[var(--primary)] hover:text-[var(--primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)]/30"
             onClick={onClose}
             aria-label="Close modal"
           >
             ×
           </button>
         </div>
-        <div className="mt-4 text-[var(--text)]">{children}</div>
+
+        {/* Scrollable Content Body — hidden scrollbars */}
+        <div className="mt-3 flex-1 overflow-y-auto pr-0 text-[var(--text)] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          {children}
+        </div>
       </div>
     </div>
   )

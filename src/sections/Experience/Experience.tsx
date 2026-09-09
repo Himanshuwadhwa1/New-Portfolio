@@ -8,25 +8,54 @@ import type { ExperienceEntry } from '../../data/experience'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
 
 function ExperienceModal({ entry, onClose }: { entry: ExperienceEntry; onClose: () => void }) {
-  // Smaller font when there are many bullets so the modal stays compact
-  const bulletClass = entry.bullets.length > 4 ? 'text-[11px] leading-5' : 'text-sm leading-7'
+  // Dynamic text sizing based on bullet count to ensure optimal readability
+  const isDense = entry.bullets.length > 4
 
   return (
-    <Modal isOpen onClose={onClose} title={entry.role} size="md">
-      <div className="space-y-3">
-        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
-          <p className="font-[JetBrainsMono] text-sm text-[var(--primary)]">{entry.company}</p>
+    <Modal isOpen onClose={onClose} title={entry.role} size="xl">
+      <div className="space-y-4">
+        {/* Company & Date Subheader */}
+        <div className="flex flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="font-[JetBrainsMono] text-sm font-bold text-[var(--primary)]">{entry.company}</p>
           <p className="font-[JetBrainsMono] text-xs text-[var(--muted)]">
             {entry.startDate} — {entry.endDate}
             {entry.location ? ` · ${entry.location}` : ''}
           </p>
         </div>
-        <ul className={`list-disc space-y-1.5 pl-5 text-[var(--muted)] ${bulletClass}`}>
-          {entry.bullets.map((bullet) => (
-            <li key={bullet}>{bullet}</li>
+
+        {/* Theme-aware Bullet List — scrollable independently */}
+        <ul className="max-h-[260px] space-y-2.5 overflow-y-auto pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:max-h-[320px]">
+          {entry.bullets.map((bullet, i) => (
+            <li
+              key={i}
+              className="group relative flex items-start gap-3 overflow-hidden rounded-xl border border-[color:var(--accent)]/15 bg-[var(--surface)] p-3 shadow-sm transition-all duration-200 hover:border-[var(--primary)]/40 hover:bg-[var(--surface)] hover:shadow-md"
+            >
+              {/* Left Accent Glow Bar */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--primary)] opacity-40 transition-all duration-200 group-hover:w-1.5 group-hover:opacity-100" />
+
+              {/* Theme Primary Check Circle Icon */}
+              <div className="ml-1 mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--primary)]/15 text-[var(--primary)] transition-transform duration-200 group-hover:scale-110 group-hover:bg-[var(--primary)] group-hover:text-[var(--bg)]">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <path
+                    d="M2.5 6L5 8.5L9.5 3.5"
+                    stroke="currentColor"
+                    strokeWidth="2.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+
+              {/* Bullet Text */}
+              <span className={`font-[Sora] text-[var(--text)]/90 ${isDense ? 'text-xs leading-5' : 'text-sm leading-6'}`}>
+                {bullet}
+              </span>
+            </li>
           ))}
         </ul>
-        <div className="flex flex-wrap gap-1.5 pt-1">
+
+        {/* Tech tags */}
+        <div className="flex flex-wrap gap-1.5 pt-2">
           {entry.techTags.map((tag) => (
             <Badge key={tag} tone="accent">
               {tag}
