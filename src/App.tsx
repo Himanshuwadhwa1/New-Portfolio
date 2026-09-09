@@ -1,11 +1,13 @@
 import { useMemo, lazy, Suspense } from 'react'
 import { EasterEggTapLogo } from './components/effects/EasterEggTapLogo'
 import { IpRevealButton } from './components/effects/IpRevealButton'
+import { MouseFollower } from './components/effects/MouseFollower'
 import { AmbientSymbol } from './components/layout/AmbientSymbol'
 import { Navbar } from './components/layout/Navbar'
 import { PageLoader } from './components/layout/PageLoader'
 import { PageSection } from './components/layout/PageSection'
 import { Button } from './components/ui/Button'
+import { useMouseFollowerState } from './hooks/useMouseFollowerState'
 import { useActiveSection } from './hooks/useActiveSection'
 import { useTapCounter } from './hooks/useTapCounter'
 import { Contact } from './sections/Contact/Contact'
@@ -29,6 +31,7 @@ function App() {
   const { theme } = useTheme()
   const activeSection = useActiveSection(sections.map((section) => section.id))
   const { handleTap, isTriggered, isWobbling, resetTaps } = useTapCounter(3)
+  const { isEnabled: isMouseEnabled, toggle: toggleMouse } = useMouseFollowerState()
 
   const content = useMemo(
     () => (
@@ -38,6 +41,7 @@ function App() {
           <PageLoader />
           <EasterEggTapLogo isActive={isTriggered} onComplete={resetTaps} />
           <IpRevealButton />
+          <MouseFollower isEnabled={isMouseEnabled} />
           <main className="relative z-10 min-h-screen text-[var(--text)] transition-colors duration-200">
             <Navbar
               activeSection={activeSection}
@@ -47,6 +51,8 @@ function App() {
               sections={sections}
               onTapLogo={handleTap}
               isWobbling={isWobbling}
+              isMouseFollowerEnabled={isMouseEnabled}
+              onToggleMouseFollower={toggleMouse}
             />
 
             <PageSection id="intro" className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-6xl flex-col justify-center">
@@ -98,7 +104,7 @@ function App() {
         </div>
       </>
     ),
-    [theme, activeSection, isTriggered, isWobbling, handleTap, resetTaps],
+    [theme, activeSection, isTriggered, isWobbling, handleTap, resetTaps, isMouseEnabled, toggleMouse],
   )
 
   return content

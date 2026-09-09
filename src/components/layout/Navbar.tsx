@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useReducedMotion } from '../../hooks/useReducedMotion'
+import { MouseToggle } from './MouseToggle'
 import { ThemeToggle } from './ThemeToggle'
 
 export interface NavbarProps {
@@ -9,9 +10,19 @@ export interface NavbarProps {
   sections: Array<{ id: string; label: string }>
   onTapLogo?: () => void
   isWobbling?: boolean
+  isMouseFollowerEnabled: boolean
+  onToggleMouseFollower: () => void
 }
 
-export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, isWobbling }: NavbarProps) {
+export function Navbar({
+  activeSection,
+  onSelectSection,
+  sections,
+  onTapLogo,
+  isWobbling,
+  isMouseFollowerEnabled,
+  onToggleMouseFollower,
+}: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const prefersReduced = useReducedMotion()
@@ -72,10 +83,13 @@ export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, is
         </nav>
 
         <div className="flex items-center gap-2">
+          <div className="hidden md:block">
+            <MouseToggle isEnabled={isMouseFollowerEnabled} onToggle={onToggleMouseFollower} />
+          </div>
           <ThemeToggle />
           <button
             type="button"
-            className="md:hidden inline-flex min-h-[44px] min-w-[44px] items-center gap-2 rounded-lg border border-[color:var(--accent)]/12 px-3 py-2 text-sm font-[JetBrainsMono] text-[var(--muted)] transition-colors hover:bg-[color:var(--surface)]/6"
+            className="md:hidden inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-[color:var(--accent)]/12 px-3 py-2 text-sm font-[JetBrainsMono] text-[var(--muted)] transition-colors hover:bg-[color:var(--surface)]/6"
             onClick={() => setIsOpen((value) => !value)}
             aria-expanded={isOpen}
             aria-label="Toggle navigation"
@@ -96,6 +110,13 @@ export function Navbar({ activeSection, onSelectSection, sections, onTapLogo, is
           }}
         >
           <div className="mx-auto flex max-w-6xl flex-col gap-3">
+            <div className="flex items-center justify-between border-b border-[color:var(--accent)]/10 pb-3 font-[JetBrainsMono] text-xs text-[var(--muted)]">
+              <span>Mouse Follower</span>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] uppercase tracking-wider">{isMouseFollowerEnabled ? 'ON' : 'OFF'}</span>
+                <MouseToggle isEnabled={isMouseFollowerEnabled} onToggle={onToggleMouseFollower} />
+              </div>
+            </div>
             <div className="flex flex-col gap-2">
               {sections.map((section) => (
                 <button
