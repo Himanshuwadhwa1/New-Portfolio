@@ -12,17 +12,17 @@ export function MouseToggle({ isEnabled, onToggle }: MouseToggleProps) {
       onClick={onToggle}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      className={`relative flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${
+      className={`flex h-12 w-12 items-center justify-center rounded-full border transition-colors shadow-sm ${
         isEnabled
           ? 'border-[var(--primary)]/30 bg-[var(--primary)]/10 text-[var(--primary)]'
-          : 'border-[var(--muted)]/20 bg-[var(--surface)] text-[var(--muted)] hover:text-[var(--text)]'
+          : 'border-[color:var(--accent)]/20 bg-[var(--surface)]/80 text-[var(--muted)] hover:text-[var(--text)]'
       }`}
       aria-label={isEnabled ? 'Disable mouse follower' : 'Enable mouse follower'}
       title={isEnabled ? 'Mouse follower: ON' : 'Mouse follower: OFF'}
     >
       <svg
-        width="18"
-        height="18"
+        width="20"
+        height="20"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
