@@ -66,7 +66,17 @@ function App() {
                 I build thoughtful web experiences, product tooling, and AI-assisted workflows with a strong focus on performance, maintainability, and calm user experience.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Button variant="primary" as="a" href="./resume.pdf" download="Himanshu_Wadhwa_Resume.pdf">
+                <Button
+                  variant="primary"
+                  as="a"
+                  href="./resume.pdf"
+                  download="Himanshu_Wadhwa_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => {
+                    window.open('./resume.pdf', '_blank')
+                  }}
+                >
                   Download Resume
                 </Button>
                 <Button variant="secondary" onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
