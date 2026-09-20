@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { track } from '@vercel/analytics'
 import { Button } from '../../components/ui/Button'
 import { Card } from '../../components/ui/Card'
 import { SectionHeading } from '../../components/ui/SectionHeading'
@@ -148,12 +149,15 @@ export function Contact() {
       })
 
       if (response.ok) {
+        track('contact_form_submit', { status: 'success' })
         setSubmitStatus('success')
         setFormData({ name: '', email: '', message: '' })
       } else {
+        track('contact_form_submit', { status: 'error' })
         setSubmitStatus('error')
       }
     } catch {
+      track('contact_form_submit', { status: 'error' })
       setSubmitStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -343,6 +347,7 @@ export function Contact() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track('social_link_click', { platform: link.name, url: link.href })}
                   className="group relative flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-[color:var(--accent)]/40 bg-[var(--surface)] p-2.5 sm:p-3 transition-all duration-300 hover:border-[var(--primary)] hover:bg-[var(--primary)]/10 hover:shadow-lg hover:shadow-[var(--primary)]/30"
                   aria-label={link.name}
                 >

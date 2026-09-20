@@ -1,4 +1,5 @@
 import { useMemo, lazy, Suspense } from 'react'
+import { track } from '@vercel/analytics'
 import { EasterEggTapLogo } from './components/effects/EasterEggTapLogo'
 import { IpRevealButton } from './components/effects/IpRevealButton'
 import { MouseFollower } from './components/effects/MouseFollower'
@@ -74,6 +75,7 @@ function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
+                    track('resume_download', { location: 'hero' })
                     window.open('./resume.pdf', '_blank')
                   }}
                 >
